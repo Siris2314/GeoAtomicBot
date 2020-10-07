@@ -16,7 +16,7 @@ client = commands.Bot(command_prefix = '>')
 status = cycle(['Game 1', 'Game 2'])
 
 
-with open('Config.json', 'r') as f:
+with open('config.json', 'r') as f:
   key = json.loads(f.read())
 
 token = key["token"]
