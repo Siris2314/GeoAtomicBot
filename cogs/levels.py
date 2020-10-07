@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import json
 
+
 class levels(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
@@ -26,7 +27,7 @@ class levels(commands.Cog):
 
 
         except:
-            
+
             with open('users.json', 'w', encoding = 'utf8') as f:
                 user = {}
                 user[str(message.author.id)] = {}
