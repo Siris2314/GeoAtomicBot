@@ -174,7 +174,7 @@ async def load(ctx, extension):
 
 @client.command()
 async def shutdown(ctx):
-	await ctx.send("Bot has ben shutdown")
+	await ctx.send("Bot has been shutdown")
 	await client.logout()
 
 

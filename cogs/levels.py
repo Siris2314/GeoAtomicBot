@@ -11,7 +11,6 @@ class levels(commands.Cog):
         with open('users.json', 'r', encoding='utf8') as f:
             user = json.load(f)
         try:
-
             with open('users.json', 'w', encoding='utf8') as f:
                 user[str(message.author.id)]['exp']= user[str(message.author.id)]['exp']+1
                 lvl_start = user[str(message.author.id)]['level']
@@ -27,7 +26,7 @@ class levels(commands.Cog):
 
 
         except:
-
+            
             with open('users.json', 'w', encoding = 'utf8') as f:
                 user = {}
                 user[str(message.author.id)] = {}
