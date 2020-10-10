@@ -9,7 +9,7 @@ class levelling_system(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    os.chdir(r"C:\Users\tarih\OneDrive\Desktop\GeoAtomicBot-main")
+    
 
 
 @commands.Cog.listener()

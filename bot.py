@@ -8,6 +8,8 @@ from itertools import cycle
 import asyncpg
 import platform
 import logging
+from discord.utils import get
+import youtube_dl
 
 
 
@@ -22,6 +24,7 @@ with open('config.json', 'r') as f:
   key = json.loads(f.read())
 
 token = key["token"]
+
 
 
 
@@ -139,6 +142,29 @@ async def avatar(ctx,user: discord.Member):
 	embed.set_image(url=f"{user.avatar_url}")
 
 	await ctx.send(embed=embed)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
