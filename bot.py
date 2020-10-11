@@ -134,16 +134,14 @@ async def clear(ctx, amount : int):
 		raise error
 
 
-@client.command(name = 'avatar', aliases = ['Avatar'])
-async def avatar(ctx,user: discord.Member):
-
-	embed = discord.Embed(color = discord.Color(0xffff) , title = f"{user}")
-
-	embed.set_image(url=f"{user.avatar_url}")
-
-	await ctx.send(embed=embed)
-
-
+# @client.command(name = 'avatar', aliases = ['Avatar'])
+# async def avatar(ctx,user: discord.Member):
+#
+# 	embed = discord.Embed(color = discord.Color(0xffff) , title = f"{user}")
+#
+# 	embed.set_image(url=f"{user.avatar_url}")
+#
+# 	await ctx.send(embed=embed)
 
 
 
@@ -168,13 +166,9 @@ async def avatar(ctx,user: discord.Member):
 
 
 
-@client.command()
-async def stats(ctx):
-    pythonVersion = platform.python_version()
-    dpyversion = discord.__version__
-    serverCount = len(client.guilds)
-    memberCount = len(set(client.get_all_members()))
-    await ctx.send(f"So im in {serverCount} guilds with a total of {memberCount} members. :smiley:\nIm running python {pythonVersion} and discord.py {dpyversion}")
+
+
+
 
 
 

@@ -63,7 +63,13 @@ class music_system(commands.Cog):
                 await ctx.send("Error")
                 return
         await ctx.send("Ready Time")
-        
+
+        # voice = get(bot.voice_clients, guild=ctx.guild)
+        # ydl_opts = (
+        #     "format":"bestaudio/"
+        #
+        # )
+
 
 
 
