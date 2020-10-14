@@ -7,7 +7,7 @@ import youtube_dl
 class music_system(commands.Cog):
 
     def __init__(self,bot):
-        self.client = bot
+        self.bot = bot
 
 
 
@@ -16,7 +16,7 @@ class music_system(commands.Cog):
     async def join(self,ctx):
         global voice
         channel = ctx.message.author.voice.channel
-        voice = get(self.client.voice_clients, guild=ctx.guild)
+        voice = get(self.bot.voice_clients, guild=ctx.guild)
 
         if voice and voice.is_connected():
             await voice.move_to(channel)
@@ -27,23 +27,25 @@ class music_system(commands.Cog):
         await voice.disconnect()
 
 
+
         if voice and voice.is_connected():
             await voice.move_to(channel)
 
         else:
             voice = await channel.connect()
             print(f"The bot has connected to {channel}\n")
-            await ctx.send(f"Joined {channel}")
+
+        await ctx.send(f"Joined {channel}")
 
     @commands.command(pass_context = True, aliases = ['L', 'le'])
     async def leave(self,ctx):
         channel = ctx.message.author.voice.channel
-        voice = get(self.client.voice_clients, guild=ctx.guild)
+        voice = get(self.bot.voice_clients, guild=ctx.guild)
 
         if voice and voice.is_connected():
             await voice.disconnect()
             print(f"The bot has left {channel}")
-            await ctx.send(f"Disconnect {channel}")
+            await ctx.send(f"Disconnected from {channel}")
 
 
         else:
@@ -64,11 +66,36 @@ class music_system(commands.Cog):
                 return
         await ctx.send("Ready Time")
 
-        # voice = get(bot.voice_clients, guild=ctx.guild)
-        # ydl_opts = (
-        #     "format":"bestaudio/"
-        #
-        # )
+        voice = get(bot.voice_clients, guild=ctx.guild)
+        ydl_opts = {
+            "format":  "bestaudio/best" , "postprocessors":[{
+                'key':'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredaquality': '192',
+             }],
+
+        }
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            print("Downloading Audio\n")
+            ydl.download([url])
+
+        for file in os.listdir("./"):
+            if file.endswith(".mp3"):
+                name = file
+                print(f"Renamed File: {file}\n")
+                os.rename(file, "song.mp3")
+
+        voice.play(discord.FFmpegPCMAudio("song.mp3"), after = lambda e: print(f"{name} has finished playing"))
+        voice.source = discord.PCVolumeTransformer(voice.source)
+        voice.source.volume = 0.08
+
+
+        nname = name.rsplit("-",2)
+        await ctx.send(f"Playing: {name}")
+        print("Playing")
+
+
+
 
 
 
